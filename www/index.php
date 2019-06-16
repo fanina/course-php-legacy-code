@@ -21,19 +21,7 @@ $slug = explode('?', $_SERVER['REQUEST_URI'])[0];
 $routes = Routing::getRoute($slug);
 extract($routes);
 
-$container = [
-    Users::class => function ($container) {
-        return new Users();
-    },
-    UsersController::class => function ($container) {
-        $usersController = $container[Users::class]($container);
-
-        return new UsersController($usersController);
-    },
-    PagesController::class => function ($container) {
-        return new PagesController();
-    },
-];
+$container = require 'config/di.global.php';
 
 // Vérifie l'existence du fichier et de la classe pour charger le controlleur
 if (file_exists($cPath)) {
