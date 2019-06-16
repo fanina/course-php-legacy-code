@@ -2,6 +2,13 @@
 
 class UsersController
 {
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = new Users();
+    }
+
     public function defaultAction()
     {
         echo 'users default';
@@ -9,8 +16,7 @@ class UsersController
 
     public function addAction()
     {
-        $user = new Users();
-        $form = $user->getRegisterForm();
+        $form = $this->user->getRegisterForm();
 
         $v = new View('addUser', 'front');
         $v->assign('form', $form);
@@ -18,8 +24,7 @@ class UsersController
 
     public function saveAction()
     {
-        $user = new Users();
-        $form = $user->getRegisterForm();
+        $form = $this->user->getRegisterForm();
         $method = strtoupper($form['config']['method']);
         $data = $GLOBALS['_'.$method];
 
@@ -28,11 +33,11 @@ class UsersController
             $form['errors'] = $validator->errors;
 
             if (empty($errors)) {
-                $user->setFirstname($data['firstname']);
-                $user->setLastname($data['lastname']);
-                $user->setEmail($data['email']);
-                $user->setPwd($data['pwd']);
-                $user->save();
+                $this->user->setFirstname($data['firstname']);
+                $this->user->setLastname($data['lastname']);
+                $this->user->setEmail($data['email']);
+                $this->user->setPwd($data['pwd']);
+                $this->user->save();
             }
         }
 
@@ -42,8 +47,7 @@ class UsersController
 
     public function loginAction()
     {
-        $user = new Users();
-        $form = $user->getLoginForm();
+        $form = $this->user->getLoginForm();
 
         $method = strtoupper($form['config']['method']);
         $data = $GLOBALS['_'.$method];
