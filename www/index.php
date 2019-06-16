@@ -26,7 +26,7 @@ if (file_exists($cPath)) {
     include $cPath;
     if (class_exists($c)) {
         //instancier dynamiquement le controller
-        $cObject = new $c();
+        $cObject = new $c(new Users());
         //vérifier que la méthode (l'action) existe
         if (method_exists($cObject, $a)) {
             //appel dynamique de la méthode

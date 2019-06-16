@@ -4,9 +4,9 @@ class UsersController
 {
     private $user;
 
-    public function __construct()
+    public function __construct(Users $user)
     {
-        $this->user = new Users();
+        $this->user = $user;
     }
 
     public function defaultAction()
