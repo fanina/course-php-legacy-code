@@ -19,7 +19,7 @@ services:
       MYSQL_ROOT_PASSWORD: course-legacy
       MYSQL_USER: root
     volumes:
-      - ./import.sql:/docker-entrypoint-initdb.d/import.sql
+      - ./sql/import.sql:/docker-entrypoint-initdb.d/import.sql
     restart: always
 
   phpmyadmin:
